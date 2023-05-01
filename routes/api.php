@@ -21,7 +21,9 @@ use App\Http\Controllers\UserController;
 
 // Users Service
 Route::get('/users', [UserController::class, 'allUsers']);
-Route::get('/user/{username}', [UserController::class, 'user']);
-Route::post('/user', [UserController::class, 'createUser']);
-Route::put('/user/{username}', [UserController::class, 'updateUser']);
-Route::delete('/user/{username}', [UserController::class, 'deleteUser']);
+Route::get('/user/{email}', [UserController::class, 'user']);
+Route::post('/user/create', [UserController::class, 'createUser']);
+Route::post('/user/update', [UserController::class, 'updateUser']);
+Route::post('/user/delete', [UserController::class, 'deleteUser']);
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'register']);
