@@ -16,7 +16,7 @@ class UserController extends Controller
             'message' => 'Get User List Success!',
             'result' => $users
         ];
-        return response(json_encode($response200), 200);
+        return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
     }
     public function user($email) {
         $user = DB::table('users')
@@ -29,7 +29,7 @@ class UserController extends Controller
                 'message' => 'Get User Success!',
                 'result' => $user
             ];
-            return response(json_encode($response200), 200);
+            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
         } else {
             $response400 = [
                 'code' => 400,
@@ -37,7 +37,7 @@ class UserController extends Controller
                 'message' => 'Email Not Registered!',
                 'result' => ''
             ];
-            return response(json_encode($response400), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function createUser(Request $req) {
@@ -58,7 +58,7 @@ class UserController extends Controller
                 'message' => 'Update User Success!',
                 'result' => $user->first()
             ];
-            return response(json_encode($response200), 200);
+            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
         } else {
             $response400 = [
                 'code' => 400,
@@ -66,7 +66,7 @@ class UserController extends Controller
                 'message' => 'Wrong Password!',
                 'result' => ''
             ];
-            return response(json_encode($response400), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function deleteUser(Request $req) {
@@ -82,7 +82,7 @@ class UserController extends Controller
             'message' => 'Delete User Success!',
             'result' => $user
         ];
-        return response(json_encode($response200), 200);
+        return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
     }
     public function login(Request $req) {
         $user = DB::table('users')
@@ -96,7 +96,7 @@ class UserController extends Controller
                     'message' => 'Login User Success!',
                     'result' => $user
                 ];
-                return response(json_encode($response200), 200);
+                return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
             } else {
                 $response400 = [
                     'code' => 400,
@@ -104,7 +104,7 @@ class UserController extends Controller
                     'message' => 'Wrong Password!',
                     'result' => ''
                 ];
-                return response(json_encode($response400), 400);
+                return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
             }
         } else {
             $response400 = [
@@ -113,7 +113,7 @@ class UserController extends Controller
                 'message' => 'Email Not Registered!',
                 'result' => ''
             ];
-            return response(json_encode($response400), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function register(Request $req) {
@@ -134,7 +134,7 @@ class UserController extends Controller
                 'message' => 'Register User Success!',
                 'result' => $user->first()
             ];
-            return response(json_encode($response200), 200);
+            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
         } else {
             $response400 = [
                 'code' => 400,
@@ -142,7 +142,7 @@ class UserController extends Controller
                 'message' => 'Email Already Registered!',
                 'result' => ''
             ];
-            return response(json_encode($response400), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
 }
