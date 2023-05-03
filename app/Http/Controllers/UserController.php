@@ -11,9 +11,10 @@ class UserController extends Controller
     public function allUsers() {
         $users = DB::table('users')->get();
         $response200 = [
-            'status' => 200,
-            'message' => 'Get Users Success!',
-            'data' => $users
+            'code' => 200,
+            'description' => 'OK',
+            'message' => 'Get User List Success!',
+            'result' => $users
         ];
         return response(json_encode($response200), 200);
     }
@@ -21,31 +22,26 @@ class UserController extends Controller
         $user = DB::table('users')
                     ->where('email', $email)
                     ->first();
-        $response200 = [
-            'status' => 200,
-            'message' => 'Get User Success!',
-            'data' => [$user]
-        ];
-        return response(json_encode($response200), 200);
+        if (!empty($user)) {
+            $response200 = [
+                'code' => 200,
+                'description' => 'OK',
+                'message' => 'Get User Success!',
+                'result' => $user
+            ];
+            return response(json_encode($response200), 200);
+        } else {
+            $response400 = [
+                'code' => 400,
+                'description' => 'BAD REQUEST',
+                'message' => 'Email Not Registered!',
+                'result' => ''
+            ];
+            return response(json_encode($response400), 400);
+        }
     }
     public function createUser(Request $req) {
-        // DB::table('users')
-        //     ->insert([
-        //         'first_name' => $req->first_name,
-        //         'last_name' => $req->last_name,
-        //         'email' => $req->email,
-        //         'password' => md5($req->password),
-        //         'created_at' => date('Y-m-d H:i:s')
-        //     ]);
-        // $user = DB::table('users')
-        //             ->where('email', $req->email)
-        //             ->first();
-        // $response200 = [
-        //     'status' => 200,
-        //     'message' => 'Create User Success!',
-        //     'data' => [$user]
-        // ];
-        // return response(json_encode($response200), 200);
+        
     }
     public function updateUser(Request $req) {
         $user = DB::table('users')
@@ -57,16 +53,18 @@ class UserController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
             $response200 = [
-                'status' => 200,
+                'code' => 200,
+                'description' => 'OK',
                 'message' => 'Update User Success!',
-                'data' => [$user->first()]
+                'result' => $user->first()
             ];
             return response(json_encode($response200), 200);
         } else {
             $response400 = [
-                'status' => 400,
+                'code' => 400,
+                'description' => 'BAD REQUEST',
                 'message' => 'Wrong Password!',
-                'data' => []
+                'result' => ''
             ];
             return response(json_encode($response400), 400);
         }
@@ -79,9 +77,10 @@ class UserController extends Controller
             ->where('email', $req->email)
             ->delete();
         $response200 = [
-            'status' => 200,
+            'code' => 200,
+            'description' => 'OK',
             'message' => 'Delete User Success!',
-            'data' => [$user]
+            'result' => $user
         ];
         return response(json_encode($response200), 200);
     }
@@ -92,24 +91,27 @@ class UserController extends Controller
         if (!empty($user)) {
             if ($user->password == md5($req->password)) {
                 $response200 = [
-                    'status' => 200,
+                    'code' => 200,
+                    'description' => 'OK',
                     'message' => 'Login User Success!',
-                    'data' => [$user]
+                    'result' => $user
                 ];
                 return response(json_encode($response200), 200);
             } else {
                 $response400 = [
-                    'status' => 400,
+                    'code' => 400,
+                    'description' => 'BAD REQUEST',
                     'message' => 'Wrong Password!',
-                    'data' => []
+                    'result' => ''
                 ];
                 return response(json_encode($response400), 400);
             }
         } else {
             $response400 = [
-                'status' => 400,
+                'code' => 400,
+                'description' => 'BAD REQUEST',
                 'message' => 'Email Not Registered!',
-                'data' => []
+                'result' => ''
             ];
             return response(json_encode($response400), 400);
         }
@@ -127,16 +129,18 @@ class UserController extends Controller
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
             $response200 = [
-                'status' => 200,
+                'code' => 200,
+                'description' => 'OK',
                 'message' => 'Register User Success!',
-                'data' => [$user->first()]
+                'result' => $user->first()
             ];
             return response(json_encode($response200), 200);
         } else {
             $response400 = [
-                'status' => 400,
+                'code' => 400,
+                'description' => 'BAD REQUEST',
                 'message' => 'Email Already Registered!',
-                'data' => []
+                'result' => ''
             ];
             return response(json_encode($response400), 400);
         }
