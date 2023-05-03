@@ -1,0 +1,12 @@
+$response200 = [
+    'code' => 200,
+    'description' => 'OK',
+    'message' => '',
+    'result' => 
+];
+$response400 = [
+    'code' => 400,
+    'description' => 'BAD REQUEST',
+    'message' => '',
+    'result' =>
+];
