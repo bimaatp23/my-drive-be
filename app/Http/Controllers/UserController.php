@@ -37,7 +37,7 @@ class UserController extends Controller
                 'message' => 'Email Not Registered!',
                 'result' => ''
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
     }
     public function createUser(Request $req) {
@@ -66,7 +66,7 @@ class UserController extends Controller
                 'message' => 'Wrong Password!',
                 'result' => ''
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
     }
     public function deleteUser(Request $req) {
@@ -101,19 +101,25 @@ class UserController extends Controller
                 $response400 = [
                     'code' => 400,
                     'description' => 'BAD REQUEST',
-                    'message' => 'Wrong Password!',
-                    'result' => ''
+                    'message' => 'Login User Failed!',
+                    'result' => [
+                        'email' => '',
+                        'password' => 'Wrong Password'
+                    ]
                 ];
-                return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+                return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
             }
         } else {
             $response400 = [
                 'code' => 400,
                 'description' => 'BAD REQUEST',
-                'message' => 'Email Not Registered!',
-                'result' => ''
+                'message' => 'Login User Failed!',
+                'result' => [
+                    'email' => 'Email Not Registered',
+                    'password' => ''
+                ]
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
     }
     public function register(Request $req) {
@@ -142,7 +148,7 @@ class UserController extends Controller
                 'message' => 'Email Already Registered!',
                 'result' => ''
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
     }
 }
