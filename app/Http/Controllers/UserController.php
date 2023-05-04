@@ -126,27 +126,49 @@ class UserController extends Controller
         $user = DB::table('users')
                     ->where('email', $req->email);
         if (empty($user->first())) {
-            DB::table('users')
-                ->insert([
-                    'first_name' => $req->first_name,
-                    'last_name' => $req->last_name,
-                    'email' => $req->email,
-                    'password' => md5($req->password),
-                    'created_at' => date('Y-m-d H:i:s')
-                ]);
-            $response200 = [
-                'code' => 200,
-                'description' => 'OK',
-                'message' => 'Register User Success!',
-                'result' => $user->first()
-            ];
-            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
+            if ($req->password == $req->c_password) {
+                DB::table('users')
+                    ->insert([
+                        'first_name' => $req->first_name,
+                        'last_name' => $req->last_name,
+                        'email' => $req->email,
+                        'password' => md5($req->password),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                $response200 = [
+                    'code' => 200,
+                    'description' => 'OK',
+                    'message' => 'Register User Success!',
+                    'result' => $user->first()
+                ];
+                return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
+            } else {
+                $response400 = [
+                    'code' => 400,
+                    'description' => 'BAD REQUEST',
+                    'message' => 'Register User Failed!',
+                    'result' => [
+                        'first_name' => '',
+                        'last_name' => '',
+                        'email' => '',
+                        'password' => '',
+                        'c_password' => 'Passwords Are Not The Same'
+                    ]
+                ];
+                return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            }
         } else {
             $response400 = [
                 'code' => 400,
                 'description' => 'BAD REQUEST',
-                'message' => 'Email Already Registered!',
-                'result' => ''
+                'message' => 'Register User Failed!',
+                'result' => [
+                    'first_name' => '',
+                    'last_name' => '',
+                    'email' => 'Email Already Registered',
+                    'password' => '',
+                    'c_password' => ''
+                ]
             ];
             return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
