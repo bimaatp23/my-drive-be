@@ -34,14 +34,11 @@ class UserController extends Controller
             $response400 = [
                 'code' => 400,
                 'description' => 'BAD REQUEST',
-                'message' => 'Email Not Registered!',
+                'message' => 'Get User Failed!',
                 'result' => ''
             ];
             return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
-    }
-    public function createUser(Request $req) {
-        
     }
     public function updateUser(Request $req) {
         $user = DB::table('users')
@@ -63,26 +60,16 @@ class UserController extends Controller
             $response400 = [
                 'code' => 400,
                 'description' => 'BAD REQUEST',
-                'message' => 'Wrong Password!',
-                'result' => ''
+                'message' => 'Update User Failed!',
+                'result' => [
+                    'first_name' => '',
+                    'last_name' => '',
+                    'email' => '',
+                    'password' => 'Wrong Password'
+                ]
             ];
             return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
         }
-    }
-    public function deleteUser(Request $req) {
-        $user = DB::table('users')
-                    ->where('email', $req->email)
-                    ->first();
-        DB::table('users')
-            ->where('email', $req->email)
-            ->delete();
-        $response200 = [
-            'code' => 200,
-            'description' => 'OK',
-            'message' => 'Delete User Success!',
-            'result' => $user
-        ];
-        return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
     }
     public function login(Request $req) {
         $user = DB::table('users')
