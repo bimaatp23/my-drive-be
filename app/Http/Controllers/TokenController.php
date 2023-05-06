@@ -43,12 +43,6 @@ class TokenController extends Controller
         }
     }
     public function checkToken(Request $req) {
-        $response200 = [
-            'code' => 200,
-            'description' => 'OK',
-            'message' => 'Check Token Success!',
-            'result' => ''
-        ];
-        return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
+        
     }
 }

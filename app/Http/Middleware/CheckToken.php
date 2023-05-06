@@ -18,7 +18,7 @@ class CheckToken
     public function handle(Request $request, Closure $next)
     {
         $token = $request->header('Token');
-        $time = date('Y-m-d H:i:s', mktime()-(5*60));
+        $time = date('Y-m-d H:i:s', mktime()-(10*60));
         $check = DB::table('tokens')
                     ->where('token', $token)
                     ->where('updated_at', '>', $time);

@@ -30,5 +30,7 @@ Route::post('/user/login', [UserController::class, 'login']);
 Route::post('/user/register', [UserController::class, 'register']);
 
 // Tokens Service
+Route::middleware(['check.token'])->group(function () {
+    Route::get('/token/check', [TokenController::class, 'checkToken']);
+});
 Route::post('/token/create', [TokenController::class, 'createToken']);
-Route::middleware(['check.token'])->post('/token/check', [TokenController::class, 'checkToken']);
