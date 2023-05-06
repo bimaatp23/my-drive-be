@@ -62,9 +62,6 @@ class UserController extends Controller
                 'description' => 'BAD REQUEST',
                 'message' => 'Update User Failed!',
                 'result' => [
-                    'first_name' => '',
-                    'last_name' => '',
-                    'email' => '',
                     'password' => 'Wrong Password'
                 ]
             ];
@@ -90,7 +87,6 @@ class UserController extends Controller
                     'description' => 'BAD REQUEST',
                     'message' => 'Login User Failed!',
                     'result' => [
-                        'email' => '',
                         'password' => 'Wrong Password'
                     ]
                 ];
@@ -102,8 +98,7 @@ class UserController extends Controller
                 'description' => 'BAD REQUEST',
                 'message' => 'Login User Failed!',
                 'result' => [
-                    'email' => 'Email Not Registered',
-                    'password' => ''
+                    'email' => 'Email Not Registered'
                 ]
             ];
             return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
