@@ -12,4 +12,12 @@ $response400 = [
     'message' => '',
     'result' => ''
 ];
-return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
+
+$response403 = [
+    'code' => 403,
+    'description' => 'FORBIDDEN',
+    'message' => '',
+    'result' => ''
+];
+return response(json_encode($response403, JSON_PRETTY_PRINT), 403);
