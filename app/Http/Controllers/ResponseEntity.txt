@@ -2,11 +2,14 @@ $response200 = [
     'code' => 200,
     'description' => 'OK',
     'message' => '',
-    'result' => 
+    'result' => ''
 ];
+return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
+
 $response400 = [
     'code' => 400,
     'description' => 'BAD REQUEST',
     'message' => '',
-    'result' =>
+    'result' => ''
 ];
+return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
