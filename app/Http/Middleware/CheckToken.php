@@ -23,7 +23,7 @@ class CheckToken
                     ->where('token', $token)
                     ->where('updated_at', '>', $time);
         if ($check->count() == 1) {
-            $token->update([
+            $check->update([
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
             return $next($request);
