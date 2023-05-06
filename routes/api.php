@@ -21,9 +21,11 @@ use App\Http\Controllers\TokenController;
 // });
 
 // Users Service
-Route::get('/user/list', [UserController::class, 'allUsers']);
-Route::get('/user/{email}', [UserController::class, 'user']);
-Route::post('/user/update', [UserController::class, 'updateUser']);
+Route::middleware(['check.token'])->group(function () {
+    Route::get('/user/list', [UserController::class, 'allUsers']);
+    Route::get('/user/{email}', [UserController::class, 'user']);
+    Route::post('/user/update', [UserController::class, 'updateUser']);
+});
 Route::post('/user/login', [UserController::class, 'login']);
 Route::post('/user/register', [UserController::class, 'register']);
 

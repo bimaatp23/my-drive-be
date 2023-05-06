@@ -37,7 +37,7 @@ class UserController extends Controller
                 'message' => 'Get User Failed!',
                 'result' => ''
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function updateUser(Request $req) {
@@ -68,7 +68,7 @@ class UserController extends Controller
                     'password' => 'Wrong Password'
                 ]
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function login(Request $req) {
@@ -94,7 +94,7 @@ class UserController extends Controller
                         'password' => 'Wrong Password'
                     ]
                 ];
-                return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+                return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
             }
         } else {
             $response400 = [
@@ -106,7 +106,7 @@ class UserController extends Controller
                     'password' => ''
                 ]
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function register(Request $req) {
@@ -135,14 +135,10 @@ class UserController extends Controller
                     'description' => 'BAD REQUEST',
                     'message' => 'Register User Failed!',
                     'result' => [
-                        'first_name' => '',
-                        'last_name' => '',
-                        'email' => '',
-                        'password' => '',
                         'c_password' => 'Passwords Are Not The Same'
                     ]
                 ];
-                return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+                return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
             }
         } else {
             $response400 = [
@@ -150,14 +146,10 @@ class UserController extends Controller
                 'description' => 'BAD REQUEST',
                 'message' => 'Register User Failed!',
                 'result' => [
-                    'first_name' => '',
-                    'last_name' => '',
-                    'email' => 'Email Already Registered',
-                    'password' => '',
-                    'c_password' => ''
+                    'email' => 'Email Already Registered'
                 ]
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
 }
