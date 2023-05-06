@@ -31,5 +31,4 @@ Route::post('/user/register', [UserController::class, 'register']);
 
 // Tokens Service
 Route::post('/token/create', [TokenController::class, 'createToken']);
-Route::post('/token/update', [TokenController::class, 'updateToken']);
-Route::post('/token/check', [TokenController::class, 'checkToken']);
+Route::middleware(['check.token'])->post('/token/check', [TokenController::class, 'checkToken']);

@@ -39,58 +39,16 @@ class TokenController extends Controller
                 'message' => 'Create Token Failed!',
                 'result' => ''
             ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
-        }
-    }
-    public function updateToken(Request $req) {
-        $time = date('Y-m-d H:i:s', mktime()-(5*60));
-        $token = DB::table('tokens')
-                    ->where('email', $req->email)
-                    ->where('token', $req->token)
-                    ->where('updated_at', '>', $time);
-        if (!empty($token->first())) {
-            $token->update([
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-            $response200 = [
-                'code' => 200,
-                'description' => 'OK',
-                'message' => 'Update Token Success!',
-                'result' => $token-first()
-            ];
-            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
-        } else {
-            $response400 = [
-                'code' => 400,
-                'description' => 'BAD REQUEST',
-                'message' => 'Update Token Failed!',
-                'result' => ''
-            ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
+            return response(json_encode($response400, JSON_PRETTY_PRINT), 400);
         }
     }
     public function checkToken(Request $req) {
-        $time = date('Y-m-d H:i:s', mktime()-(5*60));
-        $token = DB::table('tokens')
-                    ->where('email', $req->email)
-                    ->where('token', $req->token)
-                    ->where('updated_at', '>', $time);
-        if (!empty($token->first())) {
-            $response200 = [
-                'code' => 200,
-                'description' => 'OK',
-                'message' => 'Check Token Success!',
-                'result' => ''
-            ];
-            return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
-        } else {
-            $response400 = [
-                'code' => 400,
-                'description' => 'BAD REQUEST',
-                'message' => 'Check Token Failed!',
-                'result' => ''
-            ];
-            return response(json_encode($response400, JSON_PRETTY_PRINT), 200);
-        }
+        $response200 = [
+            'code' => 200,
+            'description' => 'OK',
+            'message' => 'Check Token Success!',
+            'result' => ''
+        ];
+        return response(json_encode($response200, JSON_PRETTY_PRINT), 200);
     }
 }
