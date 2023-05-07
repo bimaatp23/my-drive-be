@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TokenController extends Controller
 {
@@ -14,7 +15,7 @@ class TokenController extends Controller
                         ->get();
         if ($userCheck->count() == 1) {
             $time = date('Y-m-d H:i:s');
-            $token = base64_encode($req->email).'.'.base64_encode($time);
+            $token = Hash::make($req->email).Hash::make($time);
             DB::table('tokens')
                 ->insert([
                     'email' => $req->email,
